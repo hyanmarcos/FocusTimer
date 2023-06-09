@@ -25,6 +25,11 @@ function resetControl(){
     buttonStop.classList.add('hide')
 }
 
+function updateTimerDisplay(minutes, seconds) {
+    minutesDisplay.textContent = String(minutes).padStart(2, "0")
+    secondsDisplay.textContent = String(seconds).padStart(2, "0")
+}
+
 // Função recursiva
 function countdown() {
     setTimeout(function (){
@@ -32,6 +37,7 @@ function countdown() {
         let minutes = Number(minutesDisplay.textContent)
     
         secondsDisplay.textContent = "00"
+        updateTimerDisplay(minutes, 0)
         
         if (minutes <= 0) {
             resetControl()
@@ -40,12 +46,11 @@ function countdown() {
 
 
         if (seconds <= 0) {
-            seconds = 2
-
-            minutesDisplay.textContent = String(minutes - 1).padStart(2, "0")
+            seconds = 5
+            --minutes
         }
         
-        secondsDisplay.textContent = String(seconds - 1).padStart(2, "0")
+        updateTimerDisplay(minutes, String(seconds -1))
 
         countdown()
     }, 1000)
@@ -82,6 +87,6 @@ buttonSoundOff.addEventListener('click', function(){
 buttonSet.addEventListener('click', function(){
     minutes = prompt('Quantos minutos?')
 
-    minutesDisplay.textContent = String(minutes).padStart(2, "0")
+    updateTimerDisplay(minutes, 0)
 })
 
