@@ -25,7 +25,7 @@ export default function Timer({
         
             updateDisplay(minutes, 0)
         
-            if (minutes <= 0) {
+            if (minutes <= 0 && seconds <= 0) {
                 resetControls()
                 return
             }
